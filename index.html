@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Will You Be My Valentine?</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: #ffe0ec;
+      font-family: 'Georgia', serif;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .container {
+      text-align: center;
+      z-index: 10;
+    }
+
+    h1 {
+      font-size: 2.8rem;
+      color: #c0392b;
+      margin-bottom: 3rem;
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+    }
+
+    .buttons {
+      display: flex;
+      gap: 4rem;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .btn-yes {
+      padding: 16px 48px;
+      font-size: 1.4rem;
+      background: #e74c3c;
+      color: white;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      font-family: 'Georgia', serif;
+      transition: transform 0.2s, background 0.2s;
+      box-shadow: 0 4px 15px rgba(231, 76, 60, 0.4);
+    }
+
+    .btn-yes:hover {
+      transform: scale(1.1);
+      background: #c0392b;
+    }
+
+    .btn-no {
+      padding: 16px 48px;
+      font-size: 1.4rem;
+      background: #95a5a6;
+      color: white;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      font-family: 'Georgia', serif;
+      transition: none;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+    }
+
+    .btn-no.fleeing {
+      position: fixed;
+    }
+
+    /* Hearts background */
+    .heart {
+      position: fixed;
+      color: #f8a5b8;
+      font-size: 1.5rem;
+      opacity: 0.6;
+      animation: float linear infinite;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    @keyframes float {
+      0% {
+        transform: translateY(100vh) rotate(0deg);
+        opacity: 0;
+      }
+      10% {
+        opacity: 0.6;
+      }
+      90% {
+        opacity: 0.6;
+      }
+      100% {
+        transform: translateY(-10vh) rotate(360deg);
+        opacity: 0;
+      }
+    }
+
+    /* Success screen */
+    .success {
+      display: none;
+      text-align: center;
+      z-index: 10;
+    }
+
+    .success h1 {
+      font-size: 3.5rem;
+      margin-bottom: 1rem;
+      animation: pulse 0.6s ease-in-out infinite alternate;
+    }
+
+    .success p {
+      font-size: 1.5rem;
+      color: #c0392b;
+      margin-top: 1rem;
+    }
+
+    .big-heart {
+      font-size: 8rem;
+      display: inline-block;
+      animation: pulse 0.6s ease-in-out infinite alternate;
+    }
+
+    @keyframes pulse {
+      from { transform: scale(1); }
+      to { transform: scale(1.15); }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container" id="question">
+    <h1>Will You Be My Valentine?</h1>
+    <div class="buttons">
+      <button class="btn-yes" onclick="sayYes()">Yes!</button>
+      <button class="btn-no" id="noBtn">No</button>
+    </div>
+  </div>
+
+  <div class="success" id="success">
+    <div class="big-heart">&#10084;&#65039;</div>
+    <h1>Yay!!</h1>
+    <p>thanks for not being avoidant &lt;3</p>
+  </div>
+
+  <script>
+    const noBtn = document.getElementById('noBtn');
+    const question = document.getElementById('question');
+    const success = document.getElementById('success');
+
+    function getDistance(x1, y1, x2, y2) {
+      return Math.sqrt((x2 - x1) ** 2 + (y2 - y1) ** 2);
+    }
+
+    function runAway(e) {
+      const rect = noBtn.getBoundingClientRect();
+      const btnCenterX = rect.left + rect.width / 2;
+      const btnCenterY = rect.top + rect.height / 2;
+
+      const mouseX = e.clientX || (e.touches && e.touches[0].clientX) || btnCenterX;
+      const mouseY = e.clientY || (e.touches && e.touches[0].clientY) || btnCenterY;
+
+      const distance = getDistance(mouseX, mouseY, btnCenterX, btnCenterY);
+      const threshold = 120;
+
+      if (distance < threshold) {
+        makeFixed();
+        const pad = 20;
+        const maxX = window.innerWidth - rect.width - pad;
+        const maxY = window.innerHeight - rect.height - pad;
+
+        let newX, newY, attempts = 0;
+        do {
+          newX = pad + Math.random() * (maxX - pad);
+          newY = pad + Math.random() * (maxY - pad);
+          attempts++;
+        } while (getDistance(mouseX, mouseY, newX + rect.width / 2, newY + rect.height / 2) < 200 && attempts < 50);
+
+        noBtn.style.left = newX + 'px';
+        noBtn.style.top = newY + 'px';
+      }
+    }
+
+    // Listen on the whole document so the button flees before the cursor reaches it
+    document.addEventListener('mousemove', runAway);
+    document.addEventListener('touchmove', runAway);
+
+    // Also flee on direct hover/touch just in case
+    noBtn.addEventListener('mouseenter', runAway);
+    noBtn.addEventListener('touchstart', (e) => {
+      e.preventDefault();
+      runAway(e);
+    });
+
+    // Only switch to fixed positioning on first flee — keeps layout clean until then
+    let hasFled = false;
+    function makeFixed() {
+      if (hasFled) return;
+      hasFled = true;
+      const rect = noBtn.getBoundingClientRect();
+      noBtn.style.left = rect.left + 'px';
+      noBtn.style.top = rect.top + 'px';
+      noBtn.classList.add('fleeing');
+    }
+
+    function sayYes() {
+      question.style.display = 'none';
+      success.style.display = 'block';
+      burstHearts();
+    }
+
+    // Floating background hearts
+    function createHeart() {
+      const heart = document.createElement('div');
+      heart.classList.add('heart');
+      heart.innerHTML = ['&#10084;&#65039;', '&#128149;', '&#128151;', '&#128152;', '&#128155;'][Math.floor(Math.random() * 5)];
+      heart.style.left = Math.random() * 100 + 'vw';
+      heart.style.fontSize = (1 + Math.random() * 1.5) + 'rem';
+      heart.style.animationDuration = (5 + Math.random() * 7) + 's';
+      document.body.appendChild(heart);
+      setTimeout(() => heart.remove(), 12000);
+    }
+
+    setInterval(createHeart, 600);
+
+    // Burst of hearts on yes
+    function burstHearts() {
+      for (let i = 0; i < 30; i++) {
+        setTimeout(() => createHeart(), i * 80);
+      }
+    }
+  </script>
+</body>
+</html>
