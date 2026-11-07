@@ -74,7 +74,7 @@ html, body { margin: 0; padding: 0; font-family: 'Figtree', sans-serif; backgrou
 .cols{ display:grid; grid-template-columns:repeat(3, 1fr); column-gap:8mm; grid-template-rows:auto auto; }
 .col{ display:grid; grid-row:span 2; grid-template-rows:subgrid; align-content:start; }
 .col h3{ margin:0; font-weight:600; font-size:38pt; line-height:1.1; color:var(--g); letter-spacing:-0.01em; }
-.col p{ margin:7mm 0 0; font-size:28pt; line-height:1.28; color:var(--ink); }
+.col p{ margin:7mm 0 0; font-size:28pt; line-height:1.28; color:var(--ink); text-wrap:pretty; }
 /* panel treatments — pick one by the class on .cols */
 .v-flat  .col{ background:var(--sage); border-top:2.5mm solid var(--g); padding:11mm 11mm 13mm; }
 .v-frame .col{ background:#fff; border:1.6mm solid var(--g); padding:11mm 11mm 13mm; }          /* echoes the logo frame */
@@ -125,9 +125,8 @@ html, body { margin: 0; padding: 0; font-family: 'Figtree', sans-serif; backgrou
       <img src="assets/logos/cessatech.svg" alt="cessatech" style="height:33mm">
     </div>
     <div class="orgs">
-      <!-- TODO: replace placeholders with assets/logos/hypertension-canada.svg and womens-college-hospital.svg -->
-      <div class="ph" style="width:130mm; height:30mm">Hypertension Canada logo</div>
-      <div class="ph" style="width:130mm; height:30mm">Women’s College Hospital logo</div>
+      <img src="assets/logos/hypertension-canada.png" alt="Hypertension Canada" style="height:34mm">
+      <img src="assets/logos/womens-college-hospital.png" alt="Women’s College Hospital" style="height:27mm">
     </div>
     <div class="rule"></div>
     <div class="people">
@@ -144,7 +143,7 @@ html, body { margin: 0; padding: 0; font-family: 'Figtree', sans-serif; backgrou
 
   <section class="features">
     <h2 class="sec-title">Use Cases</h2>
-    <div class="cols v-flat">
+    <div class="cols v-rule">
       <div class="col">
         <h3>HTA dossier<br>preparation</h3>
         <p>Prepare the evidence base and draft content for your HTA submission.</p>
