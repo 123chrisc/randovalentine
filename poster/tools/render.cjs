@@ -34,6 +34,7 @@ const path = require('path');
       if (cs.display === 'none' || cs.visibility === 'hidden') continue;
       const r = el.getBoundingClientRect();
       if (r.width === 0 && r.height === 0) continue;
+      if (el.hasAttribute('data-clip')) continue;   // intentional crop (e.g. photo circles)
       if (el.scrollWidth > el.clientWidth + 2 && cs.overflowX !== 'visible')
         issues.push(`clipped horizontally (${el.scrollWidth}>${el.clientWidth}px): ${desc(el)}`);
       if (el.scrollHeight > el.clientHeight + 2 && cs.overflowY !== 'visible' && el.clientHeight > 0)

@@ -46,7 +46,7 @@ html, body { margin: 0; padding: 0; font-family: 'Figtree', sans-serif; backgrou
 
 /* ---------- We’re working with — the brochure’s bracket frame ---------- */
 .working{ margin:calc(var(--gap) + 9mm) var(--F) 0; border:var(--stroke) solid var(--g); position:relative;
-          padding:18mm calc(var(--M) - var(--F) - var(--stroke)) 13mm; }
+          padding:18mm calc(var(--M) - var(--F) - var(--stroke)) 16mm; }
 .working .sec-title{
   position:absolute; top:calc(var(--stroke) / -2); transform:translateY(-53%);
   left:calc(var(--M) - var(--F) - var(--stroke) - 7mm); padding:0 7mm; background:#fff;
@@ -61,9 +61,11 @@ html, body { margin: 0; padding: 0; font-family: 'Figtree', sans-serif; backgrou
 .person{ display:flex; align-items:center; gap:7mm; }
 .face{ width:32mm; height:32mm; border-radius:50%; flex:none; padding:0.9mm;
        background:linear-gradient(to top, var(--g) 0%, var(--g) 18%, var(--t1) 100%); }
-.face img{ width:100%; height:100%; border-radius:50%; display:block; object-fit:cover; border:0.8mm solid #fff; }
+.face > span{ display:block; width:100%; height:100%; border-radius:50%; background:#fff; padding:0.8mm; }
+.face > span > span{ display:block; width:100%; height:100%; border-radius:50%; overflow:hidden; background:#fff; }
+.face img{ width:100%; height:100%; display:block; object-fit:cover; transform-origin:50% 30%; }
 .name{ font-weight:600; font-size:31pt; line-height:1.1; color:var(--g); white-space:nowrap; letter-spacing:-0.006em; }
-.aff{ font-weight:400; font-size:24pt; line-height:1.22; color:var(--grey); white-space:nowrap; margin-top:1mm; }
+.aff{ font-weight:400; font-size:26pt; line-height:1.22; color:var(--grey); white-space:nowrap; margin-top:1mm; }
 
 /* ---------- Use Cases ---------- */
 .features{ margin:var(--gap) var(--M) 0; }
@@ -71,7 +73,7 @@ html, body { margin: 0; padding: 0; font-family: 'Figtree', sans-serif; backgrou
 .cols{ display:grid; grid-template-columns:repeat(3, 1fr); column-gap:8mm; grid-template-rows:auto auto; }
 .col{ display:grid; grid-row:span 2; grid-template-rows:subgrid; align-content:start; }
 .col h3{ margin:0; font-weight:600; font-size:38pt; line-height:1.1; color:var(--g); letter-spacing:-0.01em; }
-.col p{ margin:7mm 0 0; font-size:28pt; line-height:1.28; color:var(--ink); text-wrap:pretty; }
+.col p{ margin:7mm 0 0; font-size:28pt; line-height:1.28; color:var(--ink); text-wrap:balance; }
 /* panel treatments — pick one by the class on .cols */
 .v-flat  .col{ background:var(--sage); border-top:2.5mm solid var(--g); padding:11mm 11mm 13mm; }
 .v-frame .col{ background:#fff; border:1.6mm solid var(--g); padding:11mm 11mm 13mm; }          /* echoes the logo frame */
@@ -81,17 +83,17 @@ html, body { margin: 0; padding: 0; font-family: 'Figtree', sans-serif; backgrou
 
 /* ---------- Case study box ---------- */
 .case{ margin:var(--gap) var(--M) 0; background:var(--g); color:#fff;
-       display:grid; grid-template-columns:1fr 0.5mm 222mm; column-gap:18mm; padding:17mm 20mm; align-items:center; }
+       display:grid; grid-template-columns:1fr 0.5mm 222mm; column-gap:18mm; padding:17mm 20mm; align-items:start; }
 .case h2{ margin:0; font-weight:600; font-size:60pt; line-height:1.02; color:#fff; letter-spacing:-0.015em; }
 .case p.lede{ margin:8mm 0 0; font-size:30pt; line-height:1.3; color:var(--t1); text-wrap:balance; }
-.vrule{ align-self:stretch; background:rgba(206,220,211,0.45); }
+.vrule{ align-self:stretch; background:#5d886b; }
 .stat + .stat{ margin-top:10mm; }
 .big{ display:block; font-weight:600; font-size:86pt; line-height:1; letter-spacing:-0.02em; color:var(--t1); white-space:nowrap; margin-left:-0.05em; }
 .cap{ display:block; font-size:28pt; line-height:1.2; color:#fff; margin-top:2.5mm; white-space:nowrap; }
 
 /* ---------- Featured in ---------- */
 .featured{ margin:var(--gap) var(--M) 0; }
-.featured .sec-title{ margin:0 0 11mm -1.0mm; }
+.featured .sec-title{ margin:0 0 8.5mm -1.0mm; }
 .journals{ display:flex; justify-content:space-between; align-items:center; }
 .journals img{ display:block; }
 
@@ -101,9 +103,15 @@ html, body { margin: 0; padding: 0; font-family: 'Figtree', sans-serif; backgrou
 .demo{ font-size:96pt; font-weight:600; line-height:1; color:#fff; letter-spacing:-0.02em; white-space:nowrap; margin-left:-0.05em; }
 .mail{ margin-top:10mm; font-size:32pt; line-height:1.2; display:flex; align-items:center; gap:7mm; white-space:nowrap; }
 .mail i{ width:0.5mm; height:10mm; background:var(--t3); display:block; }
-.qr{ width:78mm; height:78mm; background:#fff; padding:10mm; flex:none; }  /* 25 modules × 2.32 mm; quiet zone ≈ 4.3 modules */
-.qr img{ width:58mm; height:58mm; display:block; }
+.qr{ width:87.2mm; height:87.2mm; background:#fff; padding:10.6mm; flex:none; }  /* 25 modules × 2.64 mm = 66 mm; quiet zone 4 modules */
+.qr img{ width:66mm; height:66mm; display:block; }
 .nw{ white-space:nowrap; }
+
+/* ---------- print bleed (html.bleed): page = trim + 3 mm on every side ----------
+   The poster sits 3 mm in from the page edge and everything that touches the trim edge
+   (only the green footer) is drawn 3 mm past it, as real vector colour. */
+html.bleed .poster{ margin:3mm; overflow:visible; }
+html.bleed .cta{ margin:auto -3mm -3mm; height:121mm; padding:0 calc(var(--M) + 3mm) 3mm; }
 </style>
 </head>
 <body>
@@ -117,26 +125,26 @@ html, body { margin: 0; padding: 0; font-family: 'Figtree', sans-serif; backgrou
   <section class="working">
     <h2 class="sec-title">We’re working with</h2>
     <div class="orgs">
-      <img src="assets/logos/pharmaessentia.svg" alt="PharmaEssentia" style="height:17mm">
+      <img src="assets/logos/pharmaessentia.png" alt="PharmaEssentia" style="height:16mm">
       <img src="assets/logos/canada.svg" alt="Government of Canada" style="height:16.5mm">
-      <img src="assets/logos/cessatech.svg" alt="cessatech" style="height:33mm">
+      <img src="assets/logos/cessatech.svg" alt="cessatech" style="height:36mm">
     </div>
     <div class="orgs">
-      <img src="assets/logos/hypertension-canada.png" alt="Hypertension Canada" style="height:34mm">
-      <img src="assets/logos/wch-wordmark.png" alt="Women’s College Hospital" style="height:30mm">
+      <img src="assets/logos/hypertension-canada.png" alt="Hypertension Canada" style="height:35mm">
+      <img src="assets/logos/wch-wordmark.png" alt="Women’s College Hospital" style="height:31mm">
     </div>
     <div class="rule"></div>
     <div class="people">
       <div class="person">
-        <div class="face"><img src="assets/people/ioannidis.jpg" alt=""></div>
+        <div class="face"><span><span data-clip><img src="assets/people/ioannidis.jpg" alt="" style="transform:translateY(1%) scale(1.15)"></span></span></div>
         <div><div class="name">John Ioannidis</div><div class="aff">METRICS Lab<br>Stanford University</div></div>
       </div>
       <div class="person">
-        <div class="face"><img src="assets/people/moher.jpg" alt=""></div>
+        <div class="face"><span><span data-clip><img src="assets/people/moher.jpg" alt="" style="transform:translateY(5.5%) scale(1.15)"></span></span></div>
         <div><div class="name">David Moher</div><div class="aff">Founder<br>PRISMA Guidelines</div></div>
       </div>
       <div class="person">
-        <div class="face"><img src="assets/people/church.jpg" alt=""></div>
+        <div class="face"><span><span data-clip><img src="assets/people/church.jpg" alt="" style="transform:translateY(-4.5%) scale(1.15)"></span></span></div>
         <div><div class="name">George Church</div><div class="aff">Founder, Entrepreneur<br>Harvard University</div></div>
       </div>
     </div>
@@ -155,7 +163,7 @@ html, body { margin: 0; padding: 0; font-family: 'Figtree', sans-serif; backgrou
       </div>
       <div class="col">
         <h3>Scientific publications</h3>
-        <p>Turn your literature review into a manuscript draft for your team to refine.</p>
+        <p>Rapidly perform SLRs and generate manuscript drafts for your team to refine.</p>
       </div>
     </div>
   </section>
@@ -173,13 +181,13 @@ html, body { margin: 0; padding: 0; font-family: 'Figtree', sans-serif; backgrou
   </section>
 
   <section class="featured">
-    <h2 class="sec-title">Featured in</h2>
+    <h2 class="sec-title">Published in</h2>
     <div class="journals">
-      <img src="assets/logos/bmj.svg" alt="the bmj" style="height:23mm">
+      <img src="assets/logos/bmj.svg" alt="the bmj" style="height:21.5mm">
       <img src="assets/logos/nature.svg" alt="nature" style="height:17mm">
       <img src="assets/logos/annals.svg" alt="Annals of Internal Medicine" style="height:26mm">
       <img src="assets/logos/blood-advances.png" alt="Blood Advances" style="height:30mm">
-      <img src="assets/logos/european-urology.svg" alt="European Urology" style="height:24mm">
+      <img src="assets/logos/european-urology.svg" alt="European Urology" style="height:28mm">
     </div>
   </section>
 
