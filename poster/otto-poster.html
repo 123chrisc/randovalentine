@@ -18,13 +18,13 @@ html, body { margin: 0; padding: 0; font-family: 'Figtree', sans-serif; backgrou
 :root{
   --g:#004416;                                   /* brochure green */
   --t1:#cedcd3; --t2:#bbcec2; --t3:#a9c1b2;      /* brochure tints */
-  --panel-top:#e2eae5; --panel-bot:#f0f4f1;      /* pale sage panel gradient */
+  --sage:#e9efeb;                                /* pale sage panel */
   --grey:#636466;                                /* brochure grey */
   --ink:#1b2a20;
   --M:40mm;                                      /* side margin / grid edge */
   --F:18mm;                                      /* bracket frame inset from page edge */
   --stroke:3.6mm;                                /* bracket stroke ≈ logo frame stroke */
-  --gap:25mm;                                    /* between sections */
+  --gap:24mm;                                    /* between sections */
 }
 
 .poster{
@@ -35,59 +35,67 @@ html, body { margin: 0; padding: 0; font-family: 'Figtree', sans-serif; backgrou
 .poster > *{ flex:none; }
 
 /* ---------- header: logo left, headline right ---------- */
-.head{ display:flex; align-items:center; gap:15mm; padding:34mm var(--M) 0; }
-.logo{ width:104mm; height:auto; display:block; flex:none; }
-.head h1{ margin:0; font-weight:500; font-size:118.5pt; line-height:0.98; letter-spacing:-0.022em; color:var(--g); }
+.head{ display:flex; align-items:center; justify-content:space-between; padding:32mm var(--M) 0; }
+.logo{ width:100mm; height:auto; display:block; flex:none; }
+.head h1{ margin:0; font-weight:500; font-size:115pt; line-height:0.98; letter-spacing:-0.022em; color:var(--g); }
 .head h1 span{ display:block; white-space:nowrap; }
 
 /* ---------- section titles (one style everywhere) ---------- */
 .sec-title{ margin:0; font-weight:500; font-size:50pt; line-height:1; color:var(--g); letter-spacing:-0.008em; white-space:nowrap; }
 
+/* ---------- logo placeholders (replace with the real files) ---------- */
+.ph{ border:0.7mm dashed #8fa597; border-radius:2mm; color:#6f8676; font-size:20pt; line-height:1.15;
+     display:flex; align-items:center; justify-content:center; text-align:center; padding:0 4mm; }
+
 /* ---------- We’re working with — the brochure’s bracket frame ---------- */
 .working{ margin:calc(var(--gap) + 9mm) var(--F) 0; border:var(--stroke) solid var(--g); position:relative;
-          padding:19mm calc(var(--M) - var(--F) - var(--stroke)) 15mm; }
+          padding:18mm calc(var(--M) - var(--F) - var(--stroke)) 13mm; }
 .working .sec-title{
   position:absolute; top:calc(var(--stroke) / -2); transform:translateY(-53%);
   left:calc(var(--M) - var(--F) - var(--stroke) - 7mm); padding:0 7mm; background:#fff;
 }
-/* organisation logos first and large, in full colour, optically balanced */
+/* organisation logos first and large, in full colour, optically balanced: 3 on top, 2 centred below */
 .orgs{ display:flex; justify-content:space-between; align-items:center; }
+.orgs + .orgs{ justify-content:space-evenly; margin-top:11mm; }
 .orgs img{ display:block; }
-.rule{ height:0.5mm; background:var(--t1); margin:14mm 0 11mm; }
+.rule{ height:0.5mm; background:var(--t1); margin:12mm 0 10mm; }
 /* people: secondary, compact */
 .people{ display:grid; grid-template-columns:1fr 1fr; }
 .person{ display:flex; align-items:center; gap:7mm; }
-.face{ width:34mm; height:34mm; border-radius:50%; flex:none; padding:0.9mm;
+.face{ width:32mm; height:32mm; border-radius:50%; flex:none; padding:0.9mm;
        background:linear-gradient(to top, var(--g) 0%, var(--g) 18%, var(--t1) 100%); }
 .face img{ width:100%; height:100%; border-radius:50%; display:block; object-fit:cover; border:0.8mm solid #fff; }
-.name{ font-weight:600; font-size:32pt; line-height:1.1; color:var(--g); white-space:nowrap; letter-spacing:-0.006em; }
-.aff{ font-weight:400; font-size:24pt; line-height:1.25; color:var(--grey); white-space:nowrap; margin-top:1mm; }
+.name{ font-weight:600; font-size:31pt; line-height:1.1; color:var(--g); white-space:nowrap; letter-spacing:-0.006em; }
+.aff{ font-weight:400; font-size:24pt; line-height:1.22; color:var(--grey); white-space:nowrap; margin-top:1mm; }
 
-/* ---------- Our features ---------- */
+/* ---------- Use Cases ---------- */
 .features{ margin:var(--gap) var(--M) 0; }
-.features .sec-title{ margin:0 0 9mm -1.0mm; }
+.features .sec-title{ margin:0 0 9mm -0.6mm; }
 .cols{ display:grid; grid-template-columns:repeat(3, 1fr); column-gap:8mm; grid-template-rows:auto auto; }
-.col{ display:grid; grid-row:span 2; grid-template-rows:subgrid; align-content:start;
-      background:linear-gradient(to bottom, var(--panel-top), var(--panel-bot));
-      border-top:2.5mm solid var(--g); padding:11mm 11mm 13mm; }
+.col{ display:grid; grid-row:span 2; grid-template-rows:subgrid; align-content:start; }
 .col h3{ margin:0; font-weight:600; font-size:38pt; line-height:1.1; color:var(--g); letter-spacing:-0.01em; }
 .col p{ margin:7mm 0 0; font-size:28pt; line-height:1.28; color:var(--ink); }
+/* panel treatments — pick one by the class on .cols */
+.v-flat  .col{ background:var(--sage); border-top:2.5mm solid var(--g); padding:11mm 11mm 13mm; }
+.v-frame .col{ background:#fff; border:1.6mm solid var(--g); padding:11mm 11mm 13mm; }          /* echoes the logo frame */
+.v-rule  .col{ border-top:2.5mm solid var(--g); padding:9mm 2mm 0 0; }                          /* editorial: no panel */
+.v-solid .col{ background:var(--g); padding:11mm 11mm 13mm; }
+.v-solid .col h3{ color:#fff; } .v-solid .col p{ color:var(--t1); }
 
 /* ---------- Case study box ---------- */
 .case{ margin:var(--gap) var(--M) 0; background:var(--g); color:#fff;
-       display:grid; grid-template-columns:1fr 0.5mm 222mm; column-gap:18mm; padding:18mm 20mm; align-items:center; }
-.kicker{ font-weight:600; font-size:22pt; letter-spacing:0.14em; text-transform:uppercase; color:var(--t2); margin:0; }
-.case h2{ margin:4mm 0 0; font-weight:600; font-size:52pt; line-height:1.05; color:#fff; letter-spacing:-0.01em; }
-.case p.lede{ margin:7mm 0 0; font-size:30pt; line-height:1.3; color:#fff; text-wrap:balance; }
+       display:grid; grid-template-columns:1fr 0.5mm 222mm; column-gap:18mm; padding:17mm 20mm; align-items:center; }
+.case h2{ margin:0; font-weight:600; font-size:60pt; line-height:1.02; color:#fff; letter-spacing:-0.015em; }
+.case p.lede{ margin:8mm 0 0; font-size:30pt; line-height:1.3; color:var(--t1); text-wrap:balance; }
 .vrule{ align-self:stretch; background:rgba(206,220,211,0.45); }
-.stat + .stat{ margin-top:11mm; }
-.big{ display:block; font-weight:600; font-size:88pt; line-height:1; letter-spacing:-0.02em; color:var(--t1); white-space:nowrap; margin-left:-0.05em; }
+.stat + .stat{ margin-top:10mm; }
+.big{ display:block; font-weight:600; font-size:86pt; line-height:1; letter-spacing:-0.02em; color:var(--t1); white-space:nowrap; margin-left:-0.05em; }
 .cap{ display:block; font-size:28pt; line-height:1.2; color:#fff; margin-top:2.5mm; white-space:nowrap; }
 
 /* ---------- Featured in ---------- */
 .featured{ margin:var(--gap) var(--M) 0; }
-.featured .sec-title{ margin:0 0 12mm -1.0mm; }
-.journals{ display:flex; justify-content:space-between; align-items:flex-end; }
+.featured .sec-title{ margin:0 0 11mm -1.0mm; }
+.journals{ display:flex; justify-content:space-between; align-items:center; }
 .journals img{ display:block; }
 
 /* ---------- footer / call to action ---------- */
@@ -96,8 +104,8 @@ html, body { margin: 0; padding: 0; font-family: 'Figtree', sans-serif; backgrou
 .demo{ font-size:96pt; font-weight:600; line-height:1; color:#fff; letter-spacing:-0.02em; white-space:nowrap; margin-left:-0.05em; }
 .mail{ margin-top:10mm; font-size:32pt; line-height:1.2; display:flex; align-items:center; gap:7mm; white-space:nowrap; }
 .mail i{ width:0.5mm; height:10mm; background:var(--t3); display:block; }
-.qr{ width:80mm; height:80mm; background:#fff; padding:10.4mm; flex:none; }  /* 25 modules × 2.368 mm; quiet zone ≈ 4.4 modules */
-.qr img{ width:59.2mm; height:59.2mm; display:block; }
+.qr{ width:78mm; height:78mm; background:#fff; padding:10mm; flex:none; }  /* 25 modules × 2.32 mm; quiet zone ≈ 4.3 modules */
+.qr img{ width:58mm; height:58mm; display:block; }
 .nw{ white-space:nowrap; }
 </style>
 </head>
@@ -112,9 +120,14 @@ html, body { margin: 0; padding: 0; font-family: 'Figtree', sans-serif; backgrou
   <section class="working">
     <h2 class="sec-title">We’re working with</h2>
     <div class="orgs">
-      <img src="assets/logos/pharmaessentia.svg" alt="PharmaEssentia" style="height:18mm">
-      <img src="assets/logos/canada.svg" alt="Government of Canada" style="height:17.5mm">
-      <img src="assets/logos/cessatech.svg" alt="cessatech" style="height:35mm">
+      <img src="assets/logos/pharmaessentia.svg" alt="PharmaEssentia" style="height:17mm">
+      <img src="assets/logos/canada.svg" alt="Government of Canada" style="height:16.5mm">
+      <img src="assets/logos/cessatech.svg" alt="cessatech" style="height:33mm">
+    </div>
+    <div class="orgs">
+      <!-- TODO: replace placeholders with assets/logos/hypertension-canada.svg and womens-college-hospital.svg -->
+      <div class="ph" style="width:130mm; height:30mm">Hypertension Canada logo</div>
+      <div class="ph" style="width:130mm; height:30mm">Women’s College Hospital logo</div>
     </div>
     <div class="rule"></div>
     <div class="people">
@@ -130,14 +143,14 @@ html, body { margin: 0; padding: 0; font-family: 'Figtree', sans-serif; backgrou
   </section>
 
   <section class="features">
-    <h2 class="sec-title">Our features</h2>
-    <div class="cols">
+    <h2 class="sec-title">Use Cases</h2>
+    <div class="cols v-flat">
       <div class="col">
-        <h3>HTA dossier preparation</h3>
+        <h3>HTA dossier<br>preparation</h3>
         <p>Prepare the evidence base and draft content for your HTA submission.</p>
       </div>
       <div class="col">
-        <h3>EU JCA dossier preparation</h3>
+        <h3>EU JCA dossier<br>preparation</h3>
         <p>Map evidence to your PICO, perform <span class="nw">ITC / NMA,</span> and draft your dossier.</p>
       </div>
       <div class="col">
@@ -149,13 +162,12 @@ html, body { margin: 0; padding: 0; font-family: 'Figtree', sans-serif; backgrou
 
   <section class="case">
     <div>
-      <p class="kicker">Case study</p>
-      <h2>PharmaEssentia</h2>
+      <h2>PharmaEssentia<br>Case Study</h2>
       <p class="lede">With otto-SR, PharmaEssentia completed a <span class="nw">meta-analysis</span> and surfaced novel dosing subgroups.</p>
     </div>
     <div class="vrule"></div>
     <div>
-      <p class="stat" style="margin-bottom:0"><span class="big">Under 14 days</span><span class="cap">to complete the meta-analysis</span></p>
+      <p class="stat" style="margin:0"><span class="big">Under 14 days</span><span class="cap">to complete the meta-analysis</span></p>
       <p class="stat" style="margin-bottom:0"><span class="big">80–90%</span><span class="cap">reported time savings</span></p>
     </div>
   </section>
@@ -163,9 +175,12 @@ html, body { margin: 0; padding: 0; font-family: 'Figtree', sans-serif; backgrou
   <section class="featured">
     <h2 class="sec-title">Featured in</h2>
     <div class="journals">
-      <img src="assets/logos/bmj.svg" alt="the bmj" style="height:30mm">
-      <img src="assets/logos/nature.svg" alt="nature" style="height:22.5mm">
-      <img src="assets/logos/annals.svg" alt="Annals of Internal Medicine" style="height:34mm">
+      <img src="assets/logos/bmj.svg" alt="the bmj" style="height:23mm">
+      <img src="assets/logos/nature.svg" alt="nature" style="height:17mm">
+      <img src="assets/logos/annals.svg" alt="Annals of Internal Medicine" style="height:26mm">
+      <!-- TODO: replace placeholders with assets/logos/blood-advances.svg and european-urology.svg -->
+      <div class="ph" style="width:80mm; height:24mm">Blood Advances logo</div>
+      <div class="ph" style="width:80mm; height:24mm">European Urology logo</div>
     </div>
   </section>
 
