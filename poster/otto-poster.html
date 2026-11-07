@@ -24,7 +24,7 @@ html, body { margin: 0; padding: 0; font-family: 'Figtree', sans-serif; backgrou
   --M:40mm;                                      /* side margin / grid edge */
   --F:18mm;                                      /* bracket frame inset from page edge */
   --stroke:3.6mm;                                /* bracket stroke ≈ logo frame stroke */
-  --gap:24mm;                                    /* between sections */
+  --gap:26mm;                                    /* between sections */
 }
 
 .poster{
@@ -43,9 +43,6 @@ html, body { margin: 0; padding: 0; font-family: 'Figtree', sans-serif; backgrou
 /* ---------- section titles (one style everywhere) ---------- */
 .sec-title{ margin:0; font-weight:500; font-size:50pt; line-height:1; color:var(--g); letter-spacing:-0.008em; white-space:nowrap; }
 
-/* ---------- logo placeholders (replace with the real files) ---------- */
-.ph{ border:0.7mm dashed #8fa597; border-radius:2mm; color:#6f8676; font-size:20pt; line-height:1.15;
-     display:flex; align-items:center; justify-content:center; text-align:center; padding:0 4mm; }
 
 /* ---------- We’re working with — the brochure’s bracket frame ---------- */
 .working{ margin:calc(var(--gap) + 9mm) var(--F) 0; border:var(--stroke) solid var(--g); position:relative;
@@ -60,7 +57,7 @@ html, body { margin: 0; padding: 0; font-family: 'Figtree', sans-serif; backgrou
 .orgs img{ display:block; }
 .rule{ height:0.5mm; background:var(--t1); margin:12mm 0 10mm; }
 /* people: secondary, compact */
-.people{ display:grid; grid-template-columns:1fr 1fr; }
+.people{ display:grid; grid-template-columns:repeat(3, 1fr); column-gap:8mm; }
 .person{ display:flex; align-items:center; gap:7mm; }
 .face{ width:32mm; height:32mm; border-radius:50%; flex:none; padding:0.9mm;
        background:linear-gradient(to top, var(--g) 0%, var(--g) 18%, var(--t1) 100%); }
@@ -126,13 +123,17 @@ html, body { margin: 0; padding: 0; font-family: 'Figtree', sans-serif; backgrou
     </div>
     <div class="orgs">
       <img src="assets/logos/hypertension-canada.png" alt="Hypertension Canada" style="height:34mm">
-      <img src="assets/logos/womens-college-hospital.png" alt="Women’s College Hospital" style="height:27mm">
+      <img src="assets/logos/wch-wordmark.png" alt="Women’s College Hospital" style="height:30mm">
     </div>
     <div class="rule"></div>
     <div class="people">
       <div class="person">
         <div class="face"><img src="assets/people/ioannidis.jpg" alt=""></div>
         <div><div class="name">John Ioannidis</div><div class="aff">METRICS Lab<br>Stanford University</div></div>
+      </div>
+      <div class="person">
+        <div class="face"><img src="assets/people/moher.jpg" alt=""></div>
+        <div><div class="name">David Moher</div><div class="aff">Founder<br>PRISMA Guidelines</div></div>
       </div>
       <div class="person">
         <div class="face"><img src="assets/people/church.jpg" alt=""></div>
@@ -149,11 +150,11 @@ html, body { margin: 0; padding: 0; font-family: 'Figtree', sans-serif; backgrou
         <p>Run SLRs, meta-analyses, and <span class="nw">KM-curve</span> digitization. Build <span class="nw">cost-effectiveness</span> models for your submission.</p>
       </div>
       <div class="col">
-        <h3>EU JCA dossier<br>preparation</h3>
+        <h3>EU JCA dossier</h3>
         <p>Map evidence to your PICO, perform <span class="nw">ITC / NMA,</span> and draft your dossier.</p>
       </div>
       <div class="col">
-        <h3>Manuscript<br>preparation</h3>
+        <h3>Scientific publications</h3>
         <p>Turn your literature review into a manuscript draft for your team to refine.</p>
       </div>
     </div>
@@ -162,7 +163,7 @@ html, body { margin: 0; padding: 0; font-family: 'Figtree', sans-serif; backgrou
   <section class="case">
     <div>
       <h2>PharmaEssentia<br>Case Study</h2>
-      <p class="lede">With otto-SR, PharmaEssentia completed a <span class="nw">meta-analysis</span> and surfaced novel dosing subgroups.</p>
+      <p class="lede">PharmaEssentia used ottoSR to rapidly conduct a <span class="nw">meta-analysis</span> that identified novel dosing responses in patient subgroups.</p>
     </div>
     <div class="vrule"></div>
     <div>
@@ -177,9 +178,8 @@ html, body { margin: 0; padding: 0; font-family: 'Figtree', sans-serif; backgrou
       <img src="assets/logos/bmj.svg" alt="the bmj" style="height:23mm">
       <img src="assets/logos/nature.svg" alt="nature" style="height:17mm">
       <img src="assets/logos/annals.svg" alt="Annals of Internal Medicine" style="height:26mm">
-      <!-- TODO: replace placeholders with assets/logos/blood-advances.svg and european-urology.svg -->
-      <div class="ph" style="width:80mm; height:24mm">Blood Advances logo</div>
-      <div class="ph" style="width:80mm; height:24mm">European Urology logo</div>
+      <img src="assets/logos/blood-advances.png" alt="Blood Advances" style="height:30mm">
+      <img src="assets/logos/european-urology.svg" alt="European Urology" style="height:24mm">
     </div>
   </section>
 
